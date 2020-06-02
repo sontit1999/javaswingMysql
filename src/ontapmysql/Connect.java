@@ -21,16 +21,19 @@ import java.util.logging.Logger;
 public class Connect {
     private static Connect connect = null;
     public Connection connection = null;
+    // thông tin cấu hình kết nối mysql
     public static String databaseURL = "jdbc:mysql://localhost:3306/ontap";
     public static String USERNAME = "root";
     public static String PASSWORD = "";
     public static String jdbcDriver = "com.mysql.jdbc.Driver";
+    // hàm get đối tượng Connect để sử dụng các hàm query , update
     public static Connect getInstance(){
          if(connect==null){
              connect = new Connect();
          }
          return connect;
     }
+    // hàm connect tới mysql
     public void connectToMysql(){
         try {
             Class.forName(jdbcDriver);
@@ -50,6 +53,7 @@ public class Connect {
         }
         
     }
+    // hàm get data từ bảng trong database 
     public ResultSet queryData(String sql){
        if(connection==null){
           connectToMysql();
@@ -63,6 +67,7 @@ public class Connect {
         }
         return null;
     }
+    // hàm update data  trong database 
     public int updateData(String sql){
        if(connection==null){
           connectToMysql();
